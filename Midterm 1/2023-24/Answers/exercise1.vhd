@@ -16,15 +16,17 @@ entity ADDR_GEN_MEM is
 end ADDR_GEN_MEM;
 ----------------------------------------------------------------------
 architecture Behavioural of ADDR_GEN_MEM is
-  signal sMemAddressRow    :
-  signal sMemAddressColumn :
-  signal sSamplesCount     :
+  -- Answer 1.2
+  signal sMemAddressRow    : in unsigned(3 downto 0);
+  signal sMemAddressColumn : in unsigned(3 downto 0);
+  signal sSamplesCount     : in integer range(0 to 255);
 begin
   SamplesCount <= to_unsigned(sSamplesCount/2,8);
   MemAddrBus   <= sMemAddressRow & sMemAddressColumn;
   EndOfMemory  <= '1' when (sMemAddressColumn AND sMemAddressRow)= “1111” else '0';
 
-  P1: process (                   )
+  -- Answer: 1.1
+  P1: process (Reset, Clk)
   begin
     if Reset = '1' then
       sSamplesCount <= (others => '0');
@@ -39,7 +41,8 @@ begin
     end if;
   end process P1;
 
-  P2: process(                    )
+  -- Answer: 1.1
+  P2: process(Reset, Clk)
   begin
     if Reset = '1' then
       sMemAddressRow    <= (others => '0');
@@ -97,11 +100,18 @@ begin
     SamplesCount => SamplesCount,
     EndOfMemory  => EndOfMemory);
 
-
-
-
-
-
-
+  -- Answer: 1.4
+  process begin -- Signal not initialized, can't use clk <= not clk;
+    clk <= '0';
+    wait for 10 ns;
+    clk <= '1';
+    wait for 10 ns;
+  end process;
+  process begin
+    NewSampleIn <= '1'
+    wait for 20 ns; -- Duration: 1 clock cycle
+    NewSampleIn <= '0'
+    wait for 100 ns; -- Total period: 120 ns
+  end process;
 
 end Behavioural;
