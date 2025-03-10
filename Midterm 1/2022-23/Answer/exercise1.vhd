@@ -21,10 +21,11 @@ architecture Behavioural of RS232_Tx is
   constant StopBit         : std_logic := '1';
   ---------------------------------------------------------------------
   constant cBaudRateCycles : natural := gClkFrequency/gBaudRate;
-  signal EnaBaudRate       : _________________;
-  signal ClrBaudRate       : _________________;
-  signal CountBaudRate     : _________________;
-  signal EndBaudRate       : _________________;
+  -- Question 1.2
+  signal EnaBaudRate       : std_logic;
+  signal ClrBaudRate       : std_logic;
+  signal CountBaudRate     : natural range 0 to cBaudRateCycles;
+  signal EndBaudRate       : std_logic;
   ---------------------------------------------------------------------
   signal EnaNumBitsTx      : std_logic;
   signal ClrNumBitsTx      : std_logic;
