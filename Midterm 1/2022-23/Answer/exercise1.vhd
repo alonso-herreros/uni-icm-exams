@@ -41,7 +41,8 @@ begin
   TxD    <= RegDataTx(0);
   TxBusy <= NOT(ClrTx);
   --------------------------------------------------------------------------------
-  P1: process(  )
+  -- Question 1.1
+  P1: process( RSDataToSend )
     variable aux_Parity: std_logic;
   begin
     aux_Parity:= '0';
@@ -51,7 +52,8 @@ begin
     ParityBit <= aux_Parity;
   end process P1;
   ---------------------------------------------------------------------------
-  P2: process(  )
+  -- Question 1.1
+  P2: process( ResetN, Clk )
   begin
     if ResetN = '0' then
       RegDataTx <= (others => '1');
@@ -66,7 +68,8 @@ begin
     end if;
   end process P2;
   --------------------------------------------------------------------------------
-  P3: process(  )
+  -- Question 1.1
+  P3: process( ResetN, Clk )
   begin
     if ResetN = '0' then
       CurrentState <= Idle;
@@ -75,7 +78,8 @@ begin
     end if;
   end process P3;
   -------------------------------------------------------------------------------
-  P4: process(  )
+  -- Question 1.1
+  P4: process( CurrentState )
   begin
     ClrTx        <= '0';
     ClrBaudRate  <= '0';
@@ -104,7 +108,8 @@ begin
     end case;
   end process P4;
   ------------------------------------------------------------------------------
-  P5: process(  )
+  -- Question 1.1
+  P5: process( ResetN, Clk )
   begin
     if ResetN = '0' then
       CountBaudRate <= 0;
@@ -125,7 +130,8 @@ begin
                  else '0';
   --------------------------------------------------------------------------------
   P6: EnaNumBitsTx <= EndBaudRate;
-  process(  )
+  -- Question 1.1
+  process( ResetN, Clk )
   begin
     if ResetN = '0' then
       CountNumBitsTx <= 0;
