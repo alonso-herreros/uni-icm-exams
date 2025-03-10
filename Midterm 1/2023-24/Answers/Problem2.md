@@ -65,3 +65,14 @@ So, we'd need 24 bits to store the result.
 ## Question 2.3
 
 ![alt](question2.3.drawio.svg)
+
+## Question 2.5
+
+Due to the significantly higher clock period, **architecture B** is most likely
+a **parallel architecture**.
+
+Due to the low number of LUTs, I believe **architecture C** corresponds to a
+**serial architecture**.
+
+At a maximum resource usage, with a low clock frequency, **architecture A**
+seems to be a **pipeline architecture**.
